@@ -16,7 +16,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <nifi.version>2.8.0</nifi.version>
+        <nifi.version>1.25.0</nifi.version>
     </properties>
 
     <dependencies>
