@@ -27,7 +27,7 @@ public class CypheraProtectProcessor extends AbstractProcessor {
 
     public static final PropertyDescriptor POLICY_NAME = new PropertyDescriptor.Builder()
             .name("policy-name")
-            .displayName("Policy Name")
+            .displayName("Configuration Name")
             .description("The Cyphera policy to use (e.g. 'ssn', 'credit_card'). Must match a policy in cyphera.json.")
             .required(true)
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
