@@ -22,13 +22,13 @@ import java.util.*;
 @Tags({"cyphera", "encrypt", "fpe", "format-preserving", "protect", "data-protection"})
 @CapabilityDescription("Protects (encrypts) FlowFile content using Cyphera format-preserving encryption. "
         + "The entire FlowFile content is treated as the value to protect. "
-        + "Use with policy-based routing to protect specific fields in your data flow.")
+        + "Use with configuration-based routing to protect specific fields in your data flow.")
 public class CypheraProtectProcessor extends AbstractProcessor {
 
-    public static final PropertyDescriptor POLICY_NAME = new PropertyDescriptor.Builder()
-            .name("policy-name")
+    public static final PropertyDescriptor CONFIGURATION_NAME = new PropertyDescriptor.Builder()
+            .name("configuration-name")
             .displayName("Configuration Name")
-            .description("The Cyphera policy to use (e.g. 'ssn', 'credit_card'). Must match a policy in cyphera.json.")
+            .description("The Cyphera configuration to use (e.g. 'ssn', 'credit_card'). Must match a configuration in cyphera.json.")
             .required(true)
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
@@ -57,7 +57,7 @@ public class CypheraProtectProcessor extends AbstractProcessor {
 
     @Override
     public List<PropertyDescriptor> getSupportedPropertyDescriptors() {
-        return List.of(POLICY_NAME);
+        return List.of(CONFIGURATION_NAME);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class CypheraProtectProcessor extends AbstractProcessor {
         FlowFile flowFile = session.get();
         if (flowFile == null) return;
 
-        String policyName = context.getProperty(POLICY_NAME).getValue();
+        String configurationName = context.getProperty(CONFIGURATION_NAME).getValue();
 
         try {
             // Read content
@@ -80,7 +80,7 @@ public class CypheraProtectProcessor extends AbstractProcessor {
             });
 
             String value = new String(content, StandardCharsets.UTF_8).trim();
-            String protectedValue = client.protect(value, policyName);
+            String protectedValue = client.protect(value, configurationName);
 
             // Write protected content
             flowFile = session.write(flowFile, out -> out.write(protectedValue.getBytes(StandardCharsets.UTF_8)));

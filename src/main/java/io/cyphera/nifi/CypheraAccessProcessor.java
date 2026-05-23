@@ -14,12 +14,12 @@ import java.util.*;
 /**
  * NiFi Processor: Cyphera Access
  *
- * Accesses (decrypts) a protected value using the embedded tag.
- * No policy name needed — the tag identifies the policy.
+ * Accesses (decrypts) a protected value using the embedded header.
+ * No configuration name needed — the header identifies which configuration to use.
  */
 @Tags({"cyphera", "decrypt", "fpe", "format-preserving", "access", "data-protection"})
 @CapabilityDescription("Accesses (decrypts) FlowFile content using Cyphera format-preserving encryption. "
-        + "The embedded tag identifies which policy was used — no policy name needed.")
+        + "The embedded header identifies which configuration was used — no configuration name needed.")
 public class CypheraAccessProcessor extends AbstractProcessor {
 
     public static final Relationship REL_SUCCESS = new Relationship.Builder()

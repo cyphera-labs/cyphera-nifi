@@ -14,8 +14,8 @@ public final class CypheraLoader {
         if (instance == null) {
             synchronized (CypheraLoader.class) {
                 if (instance == null) {
-                    String path = System.getProperty("cyphera.policy.file");
-                    if (path == null || path.isEmpty()) path = System.getenv("CYPHERA_POLICY_FILE");
+                    String path = System.getProperty("cyphera.configuration.file");
+                    if (path == null || path.isEmpty()) path = System.getenv("CYPHERA_CONFIGURATION_FILE");
                     if (path == null || path.isEmpty()) path = "/etc/cyphera/cyphera.json";
                     try {
                         instance = Cyphera.fromFile(path);

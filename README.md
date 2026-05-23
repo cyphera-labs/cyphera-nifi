@@ -20,15 +20,15 @@ Copy the fat JAR to your NiFi processor plugin directory. See the platform docum
 
 ## Usage
 
-Protect sensitive fields in gov/finance data flows using Cyphera format-preserving encryption. Tag-based access means no policy name is needed to decrypt — the tag embedded in the protected value identifies the policy.
+Protect sensitive fields in gov/finance data flows using Cyphera format-preserving encryption. Header-driven access means no configuration name is needed to decrypt — the header embedded in the protected value identifies which configuration to use.
 
-## Policy File
+## Configuration File
 
 ```json
 {
-  "policies": {
-    "ssn": { "engine": "ff1", "key_ref": "demo-key", "tag": "T01" },
-    "credit_card": { "engine": "ff1", "key_ref": "demo-key", "tag": "T02" }
+  "configurations": {
+    "ssn": { "engine": "ff1", "key_ref": "demo-key", "header": "T01" },
+    "credit_card": { "engine": "ff1", "key_ref": "demo-key", "header": "T02" }
   },
   "keys": {
     "demo-key": { "material": "2B7E151628AED2A6ABF7158809CF4F3C" }
